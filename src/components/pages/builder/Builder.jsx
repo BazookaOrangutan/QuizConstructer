@@ -20,6 +20,12 @@ function QuestionTemplate() {
     setChoices([...choices, choice]);
   }
 
+  const handlerChanged = (e) => {
+    console.log(e.target);
+    // setChoices(choices.splice[parseInt(e.target.id), 1, {id:parseInt(e.target.id), key:parseInt(e.target.id)+1, value:'qqqq'}]);
+    console.log(choices);
+  };
+
   return (
     <div className="question-template">
       <div className="title">Вопрос</div>
@@ -35,10 +41,12 @@ function QuestionTemplate() {
       {choices.map((choice) => {
         return (
           <div className="choice">
+            <div>{choice.key}.</div>
             <Form.Control
               as="textarea"
-              id={`choiceText ${choice.id}`}
-              value={`${choice.key}. ${choice.value} `}
+              id={`${choice.id}`}
+              // value={`${choice.value} `}
+              onChange={handlerChanged}
             />
             {/* {choice.key}. {choice.value} */}
           </div>
@@ -54,7 +62,13 @@ function QuestionTemplate() {
         variant="outline-dark"
         size="sm"
         className="buttonAddQuestion"
-        onClick={() => AddChoice({ value: "ddw wdw", key: 4, id: 3 })}
+        onClick={() =>
+          AddChoice({
+            value: `Ответ ${choices[choices.length - 1].key + 1}`,
+            key: choices[choices.length - 1].key + 1,
+            id: choices[choices.length - 1].id + 1,
+          })
+        }
       >
         <AddCircleOutlineIcon />
         Добавить ответ

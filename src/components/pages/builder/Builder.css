@@ -3,3 +3,6 @@
     align-items: center !important;
     gap: 10px;
 }
+.choice{
+    display: flex;
+}
